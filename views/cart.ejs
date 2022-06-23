@@ -1,0 +1,51 @@
+<%- include('parts/header')%>
+    <%- include('parts/navbar')%>
+        <div class="container">
+            <table class="table">
+                <thead>
+
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Amount</th>
+
+
+                </thead>
+                <tbody>
+                    <% for(let i=0; i < carts.length; i++) { %>
+                        <tr>
+                            <td scope="col">
+                                <%= i+1 %>
+                            </td>
+                            <td scope="col">
+                                <%= carts[i].name %>
+                            </td>
+                            <td scope="col">
+                                <%= carts[i].price %> $
+                            </td>
+                            <form method="post">
+                                <td scope="col">
+                                    <input type="text" name="amount" value="<%=carts[i].amount%>">
+                                </td>
+                                <td scope="col">
+                                    <input type="hidden" name="card_id" value="<%=carts[i]._id%>">
+                                </td>
+                                <td scope="col">
+                                    <input type="submit" class="btn btn-success" value="Save" formaction="/cart/save">
+                                    <input type="submit" class="btn btn-danger" value="Delete"
+                                        formaction="/cart/delete">
+                                </td>
+
+
+
+                            </form>
+                        </tr>
+
+
+
+                        <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <%- include('parts/footer')%>

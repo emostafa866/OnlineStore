@@ -1,0 +1,43 @@
+<%- include('parts/header')%>
+    <%- include('parts/navbar')%>
+
+        <div class="container">
+            <form action="/" method="get">
+                <select name="category" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option value="all">all</option>
+                    <option value="clothes">clothes</option>
+                    <option value="electronics">electronics</option>
+                    <input type="submit" class=" btn btn-primary" value="filter">
+                </select>
+            </form>
+
+            <div class="row">
+                <% for (let product of products) { %>
+                    <div class="col col-12 col-md-6 col-lg-4 col-xl-3">
+                        <div class="card" style="width: 18rem;">
+                            <img src="/<%=product.image%>" class="card-img-top" height="286">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="/product/<%=product._id%>">
+                                        <%=product.name%>
+                                    </a>
+
+                                </h5>
+                                <h6>
+                                    price: <%=product.price%> $
+                                </h6>
+                                <form action="/cart" method="post">
+                                    <input type="hidden" name="name" value="<%=product.name%>">
+                                    <input type="hidden" name="price" value="<%=product.price%>">
+                                    <input type="number" name="amount" class="form-control">
+                                    <input type="hidden" name="id" value="<%=product._id%>">
+                                    <input class="btn btn-primary" type="submit" value="Add to cart">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+        </div>
+
+        <%- include('parts/footer')%>
